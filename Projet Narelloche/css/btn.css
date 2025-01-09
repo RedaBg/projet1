@@ -1,0 +1,86 @@
+.btn-create-ticket {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #028476;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-create-ticket:hover {
+    color: #028476;
+    background-color:rgb(255, 255, 255);
+}
+
+.status-open {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #807d79;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+}
+
+/* Apparence de "bouton" pour le statut "Résolu" */
+.status-resolved {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #38a246;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+}
+
+/* Apparence de "bouton" pour le statut "Fermé" */
+.status-closed {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #ad1111;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+}
+
+.prio-low {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #065c11;
+    background-color: #7ab982;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+}
+.prio-med {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #af8346;
+    color: #944a10;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+}
+.prio-high {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #b44c4c;
+    color: #550707;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+}
