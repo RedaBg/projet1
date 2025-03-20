@@ -12,28 +12,23 @@ $db_username = 'admin';
 $db_password = 'admin';
 $dbname = 'phpticket_advanced';
 
-// Connexion à la base de données
 $conn = new mysqli($host, $db_username, $db_password, $dbname);
 
-// Vérifier la connexion
 if ($conn->connect_error) {
     die("Échec de la connexion : " . $conn->connect_error);
 }
 
-// Vérifier si l'ID du ticket est présent dans l'URL
 if (isset($_GET['id'])) {
-    $ticket_id = intval($_GET['id']); // Sécuriser l'entrée
+    $ticket_id = intval($_GET['id']);
 
-    // Requête pour récupérer les données du ticket
     $sql = "SELECT id, title, msg, created, ticket_status, priority FROM tickets WHERE id = ?";
     if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("i", $ticket_id); // Associer l'ID à la requête
+        $stmt->bind_param("i", $ticket_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
-        // Vérifier si le ticket existe
         if ($result->num_rows > 0) {
-            $ticket = $result->fetch_assoc(); // Récupérer les données du ticket
+            $ticket = $result->fetch_assoc(); 
         } else {
             die("Ticket introuvable.");
         }
@@ -46,7 +41,6 @@ if (isset($_GET['id'])) {
     die("ID du ticket manquant.");
 }
 
-// Fermer la connexion
 $conn->close();
 
 ?>
@@ -57,24 +51,21 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Freelancer - Start Bootstrap Theme</title>
-    <!-- Favicon-->
+    <title>Service de Ticketing</title>
     <link rel="icon" type="../image/x-icon" href="../assets/favicon.ico" />
-    <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-    <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../css/styles.css" rel="stylesheet" />
     <link href="../css/table.css" rel="stylesheet">
+    <link href="../css/btn.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top" class="bg-primary">
-    <!-- Navigation-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="../index.php">Service de Ticketing</a>
@@ -92,17 +83,17 @@ $conn->close();
         </div>
     </nav>
 
-    <!-- Form Section -->
-    <header class="masthead bg-primary text-white text-center" style="height: 100vh;">
+    <header class="masthead bg-primary text-white text-center">
+    <a href="admin.php" class="btn-back" style="margin-right: 650px;" style=""><img class="retour" src="../assets/img/fleche.png" style="height:30px;margin-top:-1px; padding-right:5px;"> Retour</a>
+
         <div class="container d-flex align-items-center flex-column">
-        <h2 class="page-section-heading text-center text-uppercase text-white" style="margin-top: -50px;">Gérer le ticket</h2>
+            <h2 class="page-section-heading text-center text-uppercase text-white" style="margin-top: -50px;">Gérer le ticket</h2>
             <div class="divider-custom divider-light">
                 <div class="divider-custom-line"></div>
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
             <?php
-            // Vérifier si le message de succès est passé dans l'URL
             if (isset($_GET['success']) && $_GET['success'] == 'true') {
                 echo '<div class="alert alert-success" role="alert">Le ticket a bien été modifié.</div>';               
             }
@@ -118,10 +109,10 @@ $conn->close();
         ?>
         <style>
             textarea.form-control {
-                resize: both; /* Permet de redimensionner horizontalement et verticalement */
-                overflow: auto; /* Affiche une barre de défilement si nécessaire */
-                min-height: 100px; /* Définir une hauteur minimale */
-                min-width: 250px;  /* Définir une largeur minimale */
+                resize: both; 
+                overflow: auto;
+                min-height: 100px; 
+                min-width: 250px; 
             }
         </style>
             <form action="" method="post">
@@ -153,7 +144,9 @@ $conn->close();
             </form>
         </div>
     </header>
-
+    <div class="fixed-bottom copyright py-3 text-center text-white">
+        <div class="container"><small>&copy Essaye de voler l'idée et BRUNET Loan te cassera la gueule</small></div>
+    </div>
 </body>
 </html>
 <?php ob_end_flush(); ?>

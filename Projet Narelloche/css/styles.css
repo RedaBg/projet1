@@ -8128,6 +8128,7 @@ textarea.form-control-lg {
 
 .bg-primary {
   --bs-bg-opacity: 1;
+  min-height: 95%;
   background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
 }
 
@@ -10981,6 +10982,7 @@ html {
 }
 .masthead .masthead-avatar {
   width: 15rem;
+  padding-bottom: 35px;
 }
 
 @media (min-width: 992px) {
@@ -11045,3 +11047,50 @@ html {
 .copyright {
   background-color: #1a252f;
 }
+
+
+
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  width: 85px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: white;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  text-decoration: none;
+  border-radius: 7px;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #fff; color:#028476;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #028476;
+  border: none;
+  border-radius: 7px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;}
+
+.dropdown:hover .dropbtn {background-color: #fff ;color: #028476}

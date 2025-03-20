@@ -19,24 +19,19 @@ echo '<form action="../logout.php" method="POST">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Freelancer - Start Bootstrap Theme</title>
-    <!-- Favicon-->
+    <title>Service de Ticketing</title>
     <link rel="icon" type="../image/x-icon" href="../assets/favicon.ico" />
-    <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-    <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../css/styles.css" rel="stylesheet" />
     <link href="../css/table.css" rel="stylesheet">
 </head>
 
 <body id="page-top" class="bg-primary">
-    <!-- Navigation-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="../index.php">Service de Ticketing</a>
@@ -54,7 +49,6 @@ echo '<form action="../logout.php" method="POST">
         </div>
     </nav>
 
-    <!-- Form Section -->
     <header class="masthead bg-primary text-white text-center" style="height: 50vh;">
         <div class="container d-flex align-items-center flex-column">
         <h2 class="page-section-heading text-center text-uppercase text-white" style="margin-top: -50;">Créer un ticket</h2>
@@ -64,19 +58,16 @@ echo '<form action="../logout.php" method="POST">
                 <div class="divider-custom-line"></div>
             </div>
             <form action="create-ticket.php" method="post">
-                <!-- Titre -->
                 <div class="form-group mb-3">
                     <label class="mb-2" for="title">Titre</label>
                     <input type="text" name="title" class="form-control" id="title" placeholder="Entrez le titre" style="width:350px;" required>
                 </div>
 
-                <!-- Message -->
                 <div class="form-group mb-3">
                     <label class="mb-2" for="message">Message</label>
                     <textarea name="message" class="form-control" id="message" placeholder="Votre message" style="width:350px; height:10px;" required></textarea>
                 </div>
 
-                <!-- Catégorie -->
                 <div class="form-group mb-3">
                     <label class="mb-2" for="category">Catégorie</label>
                     
@@ -88,7 +79,6 @@ echo '<form action="../logout.php" method="POST">
                     </select>
                 </div>
 
-                <!-- Bouton d'envoi -->
                 <input type="submit" name="creer" class="btn mt-3 mb-3 btn-primary border border-white" value="Soumettre">
             </form>
         </div>
@@ -105,7 +95,6 @@ echo '<form action="../logout.php" method="POST">
     }
 ?>
 
-    <!-- Footer -->
     <div class="fixed-bottom copyright py-3 text-center text-white">
         <div class="container"><small>&copy Essaye de voler l'idée et BRUNET Loan te cassera la gueule</small></div>
     </div>
