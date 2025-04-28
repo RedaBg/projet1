@@ -1,6 +1,6 @@
 <?php 
     $host = 'localhost';
     $dbname = 'phpticket_advanced';
-    $db_username = 'admin';
-    $db_password = 'admin';
+    $db_username = 'root';
+    $db_password = 'root';
 ?>

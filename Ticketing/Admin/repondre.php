@@ -136,7 +136,7 @@ $conn->close();
                         chatContainer.scrollTop = chatContainer.scrollHeight; // Affiche directement le bas
                     });
                 </script>
-                    <?php require '../ticket.php'; chat(); ?>
+                    <?php require '../ticket.php'; chat(); notifclear(); ?>
                     <div class="row ms-auto chatbot">
                     <input type="text" class="form-control reponse" name="rep" placeholder="Tapez un message..." style="width:647px;" required><br>
                     <input type="submit" name="send" style="width:100px;position:absolute;right:0;background-color: rgba(var(--bs-secondary-rgb)" class="btn btn-primary" value="Envoyer">
@@ -158,7 +158,7 @@ $conn->close();
         die("Échec de la connexion : " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO tickets_comments (ticket_id, msg, account_id, notif) VALUES (?, ?, ?, 1)";
+    $sql = "INSERT INTO tickets_comments (ticket_id, msg, account_id, notif) VALUES (?, ?, ?, 0)";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("isi", $ticket_id, $msg, $account_id);
         if ($stmt->execute()) {

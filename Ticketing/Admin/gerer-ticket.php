@@ -8,8 +8,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] == 'Member') {
 }
 
 $host = 'localhost';
-$db_username = 'admin';
-$db_password = 'admin';
+$db_username = 'root';
+$db_password = 'root';
 $dbname = 'phpticket_advanced';
 
 $conn = new mysqli($host, $db_username, $db_password, $dbname);

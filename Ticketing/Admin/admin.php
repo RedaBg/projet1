@@ -1,6 +1,10 @@
 <?php 
 
 session_start();
+if (!isset($_GET['sort']) || ($_GET['sort'] != 'recent' && $_GET['sort'] != 'none' && $_GET['sort'] != 'old' && $_GET['sort'] != 'state' && $_GET['sort'] != 'prio')) {
+    header('Location: ?sort=none');
+    exit();
+}
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] == 'Member') {
     header('Location: ../login.php');
@@ -74,11 +78,11 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] == 'Member') {
                     </div>
                 </div>
                 <div>
-                
 
-                <?php require '../ticket.php';
-                      $sort = $_GET['sort'];
-                      getTicketAll($sort);
+                <?php 
+                    require '../ticket.php';
+                    $sort = $_GET['sort'];
+                    getTicketAll($sort);
                 ?>
 
                 </div>

@@ -13,7 +13,9 @@ function notif($ticket) {
         $query = "SELECT id FROM tickets_comments WHERE notif = 0 && ticket_id = $ticket && account_id != " . $_SESSION['user_id']. " ";
         $stmt = $pdo->query($query);
 
-        $notif = $stmt->rowCount();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $notif++;
+        }
         
         return "<span class='notif'>". $notif ."</span>";
 
@@ -23,7 +25,8 @@ function notif($ticket) {
 }
 
 function notifclear() {
-         require "database.php";
+
+    require "database.php";
 
     $ticket_id = intval($_GET['id']);
     $current_user = $_SESSION['user_id']; 
@@ -38,8 +41,8 @@ function notifclear() {
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $sql = "UPDATE tickets_comments SET notif = 1 WHERE id = " .$row['id'] ."";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute();
+            $stmtt = $pdo->prepare($sql);
+            $stmtt->execute();
         }
 
     } catch (PDOException $e) {
@@ -100,8 +103,12 @@ function getTicketAll($sort) {
 
     $i = 0;
     
-    if (isset($_GET['state'])) {$state = $_GET['state'];} else {header("Location: admin.php");}
-    if (isset($_GET['prio'])) {$prio = $_GET['prio'];} else {header("Location: admin.php");}
+    if (isset($_GET['state'])) {
+        $state = $_GET['state'];
+    }
+    if (isset($_GET['prio'])) {
+        $prio = $_GET['prio'];
+    }
 
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $db_username, $db_password);
@@ -148,7 +155,7 @@ function getTicketAll($sort) {
                             echo "<td><div class='status-closed'>Fermé</div></td>";
                         }
                 echo   "<td><a href='gerer-ticket.php?id=" . $row['id'] . "'class='btn-create-ticket'>Gérer</a></td>
-                        <td><a href='repondre.php?id=" . $row['id'] . "'class='btn-create-ticket'>Répondre</a></td>
+                        <td><a href='repondre.php?id=" . $row['id'] . "'class='btn-create-ticket'>Répondre</a>". notif($row['id']) ."</td>
                     </tr>";
             }
 

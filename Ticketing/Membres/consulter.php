@@ -1,42 +1,4 @@
 <?php
-$host = 'localhost'; 
-$dbname = 'phpticket_advanced';
-$db_username = 'admin'; 
-$db_password = 'admin';
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $db_username, $db_password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    if (isset($_GET['id'])) {
-        $ticket_id = intval($_GET['id']);
-        
-        $stmt = $pdo->prepare("SELECT id, title, msg, created, ticket_status FROM tickets WHERE id = ?");
-        $stmt->execute([$ticket_id]);
-        $ticket = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        if (!$ticket) {
-            die("Ticket introuvable.");
-        }
-        
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $msg = $_POST['msg'];
-            $created = date('Y-m-d H:i:s');
-            
-            $stmt = $pdo->prepare("INSERT INTO tickets_comments (id, ticket_id, msg, created, account_id) VALUES (?, ?, ?, ?, ?)");
-            $stmt->execute([$id, $ticket_id, $msg, $created, $account_id]);
-            
-            $stmt = $pdo->prepare("UPDATE tickets SET ticket_status = 'resolved' WHERE id = ?");
-            $stmt->execute([$ticket_id]);
-            
-            echo "<div class='alert alert-success'>Réponse envoyée avec succès!</div>";
-        }
-    } else {
-        die("ID du ticket manquant.");
-    }
-} catch (PDOException $e) {
-    echo "Erreur de connexion à la base de données : " . $e->getMessage();
-}
 
 ob_start();
 session_start();
@@ -46,10 +8,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] == 'Admin') {
     exit();
 }
 
-$host = 'localhost';
-$db_username = 'admin';
-$db_password = 'admin';
-$dbname = 'phpticket_advanced';
+require "../database.php";
 
 $conn = new mysqli($host, $db_username, $db_password, $dbname);
 
@@ -123,7 +82,7 @@ $conn->close();
     </nav>
 
     <header class="masthead bg-primary text-white text-center">
-    <a href="membre.php" class="btn-back" style="margin-right: 650px;" style=""><img class="retour" src="../assets/img/fleche.png" style="height:30px;margin-top:-1px; padding-right:5px;"> Retour</a>
+    <a href="admin.php" class="btn-back" style="margin-right: 650px;" style=""><img class="retour" src="../assets/img/fleche.png" style="height:30px;margin-top:-1px; padding-right:5px;"> Retour</a>
 
         <div class="container d-flex align-items-center flex-column">
             <h2 class="page-section-heading text-center text-uppercase text-white" style="margin-top: -50px;">Répondre au ticket</h2>
@@ -134,7 +93,7 @@ $conn->close();
             </div>
             <?php
             if (isset($_GET['success']) && $_GET['success'] == 'true') {
-                echo '<div class="alert alert-success" role="alert">Le ticket a bien été modifié.</div>';               
+                echo '<div class="alert alert-success" role="alert">Message envoyé.</div>';
             }
             try {           
                 if(@$_POST['reponse']) {
@@ -177,14 +136,45 @@ $conn->close();
                         chatContainer.scrollTop = chatContainer.scrollHeight; // Affiche directement le bas
                     });
                 </script>
-                    <?php require '../ticket.php'; chat(); ?>
+                    <?php require '../ticket.php'; chat(); notifclear(); ?>
                     <div class="row ms-auto chatbot">
-                    <input type="text" class="form-control" class="reponse" name="message" placeholder="Tapez un message..." style="width:647px;" required><br>
+                    <input type="text" class="form-control reponse" name="rep" placeholder="Tapez un message..." style="width:647px;" required><br>
                     <input type="submit" name="send" style="width:100px;position:absolute;right:0;background-color: rgba(var(--bs-secondary-rgb)" class="btn btn-primary" value="Envoyer">
                     </div>
                 </div>
             </div>
             </form>
+
+ <?php if (isset($_POST['send']) && !empty($_POST['rep'])) {
+    require "../database.php";
+
+    $msg = $_POST['rep'];
+    $ticket_id = intval($_GET['id']);
+    $account_id = $_SESSION['user_id'];
+
+    $conn = new mysqli($host, $db_username, $db_password, $dbname);
+
+    if ($conn->connect_error) {
+        die("Échec de la connexion : " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO tickets_comments (ticket_id, msg, account_id, notif) VALUES (?, ?, ?, 0)";
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("isi", $ticket_id, $msg, $account_id);
+        if ($stmt->execute()) {
+            header("Location: ?id=$ticket_id&success=true");
+            exit();
+        } else {
+            echo "Erreur d'exécution : " . $stmt->error;
+        }
+        $stmt->close();
+    } else {
+        echo "Erreur de préparation : " . $conn->error;
+    }
+
+    $conn->close();
+}
+?>           
 
     </header>
     <div class="fixed-bottom copyright py-3 text-center text-white">
