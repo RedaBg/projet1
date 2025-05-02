@@ -82,7 +82,7 @@ $conn->close();
     </nav>
 
     <header class="masthead bg-primary text-white text-center">
-    <a href="admin.php" class="btn-back" style="margin-right: 650px;" style=""><img class="retour" src="../assets/img/fleche.png" style="height:30px;margin-top:-1px; padding-right:5px;"> Retour</a>
+    <a href="membre.php" class="btn-back" style="margin-right: 650px;" style=""><img class="retour" src="../assets/img/fleche.png" style="height:30px;margin-top:-1px; padding-right:5px;"> Retour</a>
 
         <div class="container d-flex align-items-center flex-column">
             <h2 class="page-section-heading text-center text-uppercase text-white" style="margin-top: -50px;">Répondre au ticket</h2>

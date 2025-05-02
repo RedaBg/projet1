@@ -17,7 +17,8 @@ function notif($ticket) {
             $notif++;
         }
         
-        return "<span class='notif'>". $notif ."</span>";
+        if ($notif >= 0) { return "<span class='notif'>". $notif ."</span>"; }
+        
 
     } catch (PDOException $e) {
         echo "Erreur de connexion à la base de données : " . $e->getMessage();
@@ -84,7 +85,7 @@ function getTicket($id) {
                         } elseif ($row['ticket_status'] == "closed") {
                             echo "<td><div class='status-closed'>Fermé</div></td>";
                         }
-                        echo   "<td><a href='consulter.php?id=" . $row['id'] . "'class='btn-create-ticket'>Consulter</a>". notif($row['id']) ."</td>";
+                        echo   "<td><a style='width:42%;' href='consulter.php?id=" . $row['id'] . "'class='btn-create-ticket'>Consulter". notif($row['id']) ."</a></td>";
                 echo "</tr>";
             }
 
@@ -155,7 +156,7 @@ function getTicketAll($sort) {
                             echo "<td><div class='status-closed'>Fermé</div></td>";
                         }
                 echo   "<td><a href='gerer-ticket.php?id=" . $row['id'] . "'class='btn-create-ticket'>Gérer</a></td>
-                        <td><a href='repondre.php?id=" . $row['id'] . "'class='btn-create-ticket'>Répondre</a>". notif($row['id']) ."</td>
+                        <td><a style='width:85%;' href='repondre.php?id=" . $row['id'] . "'class='btn-create-ticket'>Répondre". notif($row['id']) ."</a></td>
                     </tr>";
             }
 
